@@ -3,6 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "//":"npm run<command name: start>",
+    "api-server": "node server/server.js",
     "ng": "ng",
     "lite-server": "lite-server",
     "start": "ng serve",

@@ -1,28 +1,34 @@
+import { Routes, RouterModule } from '@angular/router';
+import { BooksService } from './../../services/books/books.service';
+import { AppComponent } from './../../app.component';
 import { BookComponent } from './../../components/book/book.component';
-import { LoginComponent } from './../../components/login/login.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Routes } from '@angular/router';
+import { BooksResolveService } from '../../services/books.resolver/books.service';
 
 const appRoute: Routes = [
-  //{ path: 'login', component: LoginComponent },
-  { path: 'books', component: BookComponent },
+  {
+    path: 'books', component: BookComponent,
+    resolve: {
+      books: BooksResolveService
+    }
+  },
   { path: '', redirectTo: '/books', pathMatch: 'full' },
-  { path: '**', component: BookComponent }
+  { path: '**', component: AppComponent }
 ];
 
 @NgModule({
-  imports: [
+  imports:
+  [
     CommonModule,
     RouterModule.forRoot(appRoute)
   ],
+  providers: [BooksResolveService],
   exports: [RouterModule],
   declarations: []
 })
 export class routingModule {
-  constructor() {
-    console.log('app routing module');
-  }
+  constructor() { }
 }
 
 

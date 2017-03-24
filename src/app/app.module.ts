@@ -4,14 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import {routingModule} from './modules/routing/routing.module';
-import { LoginComponent } from './components/login/login.component';
-import {BookComponent} from './components/book/book.component';
+import { routingModule } from './modules/routing/routing.module';
+import { BookComponent } from './components/book/book.component';
+import { BooksResolveService } from '../app/services/books.resolver/books.service';
+import { BooksService } from '../app/services/books/books.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     BookComponent
   ],
   imports: [
@@ -20,7 +20,7 @@ import {BookComponent} from './components/book/book.component';
     HttpModule,
     routingModule
   ],
-  providers: [],
+  providers: [BooksResolveService, BooksService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

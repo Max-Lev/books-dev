@@ -3,12 +3,12 @@ const express = require('express');
 const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
+var cors = require('cors');
 
-// Get our API routes
+// Get API routes
 const api = require('./routes/api');
-const login = require('./routes/login');
-
 const app = express();
+app.use(cors());
 
 // Parsers for POST data
 app.use(bodyParser.json());
@@ -19,7 +19,6 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 // Set our api routes
 app.use('/', api);
-
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
