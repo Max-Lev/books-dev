@@ -1,49 +1,46 @@
 :host {
-    .container {
-        .card {
-            width: calc(100% / 4);
-            .card-img-top {
-                max-width: 100%;
-                height: auto;
-                max-height: 20rem;
-                min-height: 20rem;
-            }
-            .card-block {
-                text-overflow: ellipsis;
-                overflow-y: hidden;
-                white-space: nowrap;
-                position: relative;
+    .card {
+        .card-img-top {
+            max-width: 100%;
+            height: auto;
+            max-height: 20rem;
+            min-height: 20rem;
+        }
+        .card-block {
+            text-overflow: ellipsis;
+            overflow-y: hidden;
+            white-space: nowrap;
+            position: relative;
+            height: 4rem;
+            &.title {
                 height: 4rem;
-                &.title {
-                    height: 4rem;
-                }
             }
-            .card-block {
-                h4.card-title {
-                    overflow-y: hidden;
-                    text-overflow: ellipsis;
-                    height: 2rem;
-                    width: 90%;
-                    white-space: nowrap;
-                }
-            }
-            .item-desktop {
-                .list-group-item {
-                    height: 4.75rem;
-                }
-            }
-            .list-group {
+        }
+        .card-block {
+            h4.card-title {
+                overflow-y: hidden;
                 text-overflow: ellipsis;
-                white-space: normal;
-                overflow: hidden;
-                .list-group-item {
-                    &.tags-list {
-                        span {
-                            text-overflow: ellipsis;
-                            overflow: hidden;
-                            text-align: left;
-                            white-space: nowrap;
-                        }
+                height: 2rem;
+                width: 90%;
+                white-space: nowrap;
+            }
+        }
+        .item-desktop {
+            .list-group-item {
+                height: 4.75rem;
+            }
+        }
+        .list-group {
+            text-overflow: ellipsis;
+            white-space: normal;
+            overflow: hidden;
+            .list-group-item {
+                &.tags-list {
+                    span {
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        text-align: left;
+                        white-space: nowrap;
                     }
                 }
             }
@@ -52,23 +49,21 @@
 }
 
 :host {
-    .container {
-        .card {
-            .card-block {
-                &.card-btns {
-                    display: flex;
-                    flex-direction: row;
-                    text-align: center;
-                    height: 7.5rem;
-                    justify-content: center;
-                }
-                button.btn {
-                    width: 5rem;
-                    height: 5rem;
-                    background-color: transparent;
-                    border: 1px solid mediumpurple;
-                    padding: 0;
-                }
+    .card {
+        .card-block {
+            &.card-btns {
+                display: flex;
+                flex-direction: row;
+                text-align: center;
+                height: 7.5rem;
+                justify-content: center;
+            }
+            button.btn {
+                width: 5rem;
+                height: 5rem;
+                background-color: transparent;
+                border: 1px solid mediumpurple;
+                padding: 0;
             }
         }
     }

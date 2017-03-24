@@ -1,30 +1,23 @@
-<section class="container">
-  <section class="row">
+<section class="card">
 
-    <div class="card" let index="index" *ngFor="let book of booksList" (click)="card($event,book.id)">
+  <img class="card-img-top" [src]="book.image" alt="Card image cap">
+  <div class="card-block title">
+    <h4 class="card-title ">{{book.title}}</h4>
+  </div>
 
-      <img class="card-img-top" [src]="book.image" alt="Card image cap">
-      <div class="card-block title">
-        <h4 class="card-title ">{{book.title}}</h4>
-      </div>
+  <ul class="list-group list-group-flush item-desktop">
+    <li class="list-group-item">
+      <span>Author: {{ book.author}}</span>
+    </li>
+    <li class="list-group-item">Date: {{book.date}}</li>
+    <li class="list-group-item tags-list">
+      <span>{{(book.tags==undefined)?'N.A':book.tags}}</span>
+    </li>
+  </ul>
 
-      <ul class="list-group list-group-flush item-desktop">
-        <li class="list-group-item">
-          <span>Author: {{ book.author}}</span>
-        </li>
-        <li class="list-group-item">Date: {{book.date}}</li>
-        <li class="list-group-item tags-list">
-          <span>{{book.tags}}</span>
-        </li>
-      </ul>
+  <div class="card-block card-btns">
+    <button (click)="edit($event,book.id)" class="card-link btn ">Edit</button>
+    <button (click)="delete($event,book.id)" class="card-link btn ">Delete</button>
+  </div>
 
-      <div class="card-block card-btns">
-        <button (click)="edit($event,book.id)" 
-          class="card-link btn ">Edit</button>
-        <button class="card-link btn ">Delete</button>
-      </div>
-
-    </div>
-
-  </section>
 </section>

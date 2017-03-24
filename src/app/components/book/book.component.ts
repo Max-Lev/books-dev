@@ -1,28 +1,48 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+
 @Component({
-  selector: 'app-book',
+  selector: 'book',
   templateUrl: './book.component.html',
   styleUrls: ['./book.component.scss']
 })
-export class BookComponent implements OnInit {
+export class BookComponent implements OnInit, OnChanges {
 
-  booksList: any = [];
-  constructor(private _activeRoute: ActivatedRoute) {};
+  @Input() book: any;
+  @Input() list: Array<any>;
+  constructor(private activeRoute: ActivatedRoute, private router: Router) {
+
+  };
 
   ngOnInit() {
-    this.booksList = this._activeRoute.snapshot.data['books'];
-    console.log(this.booksList);
-  };
-
-  card($event, itemID: number) {
 
   };
 
-  edit($event, itemID: number) {
+  ngOnChanges() {
+
+  }
+
+  card($event, itemID: number): void {
+
+  };
+
+  edit($event, itemID: number): void {
+
     $event.stopPropagation();
+    this.router.navigate([`edit`, itemID]);
 
+  };
+
+  delete($event, itemID: number): void {
+    $event.stopPropagation();
+    let index;
+    let book = this.list.find((item) => {
+      if (item.id == itemID) {
+        index = this.list.indexOf(item);
+      }
+      return index;
+    })
+    this.list.splice(index, 1);
   };
 
 }
- 

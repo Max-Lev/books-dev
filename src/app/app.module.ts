@@ -8,17 +8,21 @@ import { routingModule } from './modules/routing/routing.module';
 import { BookComponent } from './components/book/book.component';
 import { BooksResolveService } from '../app/services/books.resolver/books.service';
 import { BooksService } from '../app/services/books/books.service';
+import { EditComponent } from './components/edit/edit.component';
+import { BooksListComponent } from './components/books-list/books-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BookComponent
+    BookComponent,
+    EditComponent,
+    BooksListComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    routingModule
+    routingModule,
   ],
   providers: [BooksResolveService, BooksService],
   bootstrap: [AppComponent]

@@ -1,0 +1,9 @@
+<section class="container">
+  <section class="row">
+
+    <section class="book-list-container" *ngFor="let book of booksListResolved;let index=index" (click)="card($event,book.id)">
+      <book [book]="book" [list]="booksListResolved"></book>
+    </section>
+
+  </section>
+</section>

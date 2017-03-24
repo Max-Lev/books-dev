@@ -11,17 +11,16 @@ export class BooksResolveService implements Resolve<any> {
 
   private _appCommon: any = AppCommon;
   private Book: Book;
-  private BookList: Array<Book> = [];
+  private BookList: Array<Book>;
 
   constructor(private _http: Http) {
     this._appCommon = new AppCommon();
-
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
 
     let data: Subject<any> = new Subject<any>();
-
+    this.BookList = [];
     this._http.get(this._appCommon.booksApi).map((bookslist: Response) => {
 
       let dataResponse = bookslist.json().books;

@@ -1,16 +1,27 @@
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 import { Injectable } from '@angular/core';
 import { AppCommon } from '../../common/common';
 
 @Injectable()
 export class BooksService {
 
-// private AppCommon: AppCommon
-  constructor() {
-    // console.log(this.AppCommon);
+  constructor() { }
+
+  books: any = new Subject<any>();
+  books$ = this.books.asObservable();
+  list: Array<any> = [];
+  sharedBooks(list: any): Observable<any> {
+
+    this.books.next(list);
+    this.list = list;
+    return this.books;
   }
 
-  getBooks() {
-    console.log('get books resolve');
+  getBooks(): any {
+    
+    return this.list;
   }
+
 
 }
