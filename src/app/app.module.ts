@@ -10,21 +10,26 @@ import { BooksResolveService } from '../app/services/books.resolver/books.servic
 import { BooksService } from '../app/services/books/books.service';
 import { EditComponent } from './components/edit/edit.component';
 import { BooksListComponent } from './components/books-list/books-list.component';
-
+import { DateConverterPipe } from './filters/date-converter.pipe';
+import { ReactiveFormsModule,FormControl,FormGroup } from '@angular/forms';
+import { BookNamePipe } from './filters/book-name.pipe';
 @NgModule({
   declarations: [
     AppComponent,
     BookComponent,
     EditComponent,
-    BooksListComponent
+    BooksListComponent,
+    DateConverterPipe,
+    BookNamePipe
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     routingModule,
+    ReactiveFormsModule
   ],
-  providers: [BooksResolveService, BooksService],
+  providers: [BooksResolveService, BooksService,DateConverterPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,9 +1,25 @@
+
+
+  <section class="container">
+      <form class="input-group">
+        <input type="text" class="form-control" 
+        (keyup)="searchFn(search)" name="search"
+        [(ngModel)]="search" placeholder="Search for book">
+        <span class="input-group-btn">
+        <button class="btn btn-secondary" type="button">Go!</button>
+      </span>
+      </form>
+    </section>
+
+
 <section class="container">
   <section class="row">
 
-    <section class="book-list-container" *ngFor="let book of booksListResolved;let index=index" (click)="card($event,book.id)">
-      <book [book]="book" [list]="booksListResolved"></book>
+<!--| bookName-->
+    <section class="book-list-container" 
+    *ngFor="let book of booksListResolved;let index=index;">
+      <book [book]="book" [mode]="mode" [list]="booksListResolved"></book>
     </section>
 
   </section>
-</section>
+</section> 

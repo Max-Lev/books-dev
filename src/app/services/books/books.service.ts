@@ -1,26 +1,29 @@
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
+import { Router } from '@angular/router';
+import { Book } from './../../components/book/book.model';
 import { Injectable } from '@angular/core';
-import { AppCommon } from '../../common/common';
-
+import { Subject, Observable } from "rxjs";
 @Injectable()
 export class BooksService {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
-  books: any = new Subject<any>();
-  books$ = this.books.asObservable();
-  list: Array<any> = [];
-  sharedBooks(list: any): Observable<any> {
-
-    this.books.next(list);
+  list: Array<any>;
+  setBooks(list: any) {
+    this.list = [];
     this.list = list;
-    return this.books;
   }
 
   getBooks(): any {
-    
     return this.list;
+  }
+
+  editBook: Book;
+  seteditBook(book: Book) {
+    this.editBook = book;
+
+  }
+  geteditBook(): Book {
+    return this.editBook;
   }
 
 

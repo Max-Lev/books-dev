@@ -5,10 +5,10 @@ export class Book {
     private author: string;
     private image: string;
     private tags?: Array<string>;
-    private date: Date;
+    public date: number;
 
     constructor(id: number, title: string, author: string,
-        date: Date, image?: string, tags?: Array<string>) {
+        date: number, image?: string, tags?: Array<string>) {
         this.id = id;
         this.title = title;
         this.author = author;

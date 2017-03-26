@@ -1,5 +1,7 @@
+import { DateConverterPipe } from './../../filters/date-converter.pipe';
+import { Book } from './../book/book.model';
 import { BooksService } from './../../services/books/books.service';
-import { Component, OnInit, OnDestroy, AfterContentInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterContentInit, DoCheck } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from "rxjs/Subscription";
 
@@ -7,49 +9,50 @@ import { Subscription } from "rxjs/Subscription";
   selector: 'book-edit',
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.scss'],
-  //providers: [BooksService]
+  providers: [DateConverterPipe]
 })
-export class EditComponent implements OnInit, OnDestroy, AfterContentInit {
+export class EditComponent implements OnInit, OnDestroy,
+  AfterContentInit, DoCheck {
 
+  editBook: Book;
+  mode: string;
   subscribtion: Subscription;
-  bookDetails: any = {
-    id: ''
-  };
-
 
   constructor(private router: Router,
     private activeRoute: ActivatedRoute,
+    private dc: DateConverterPipe,
     private booksService: BooksService) {
-
-    let x = this.booksService.getBooks();
-    console.log(x);
 
   };
 
   ngOnInit() {
     this.getBooksID();
+    this.getBook();
+    this.mode = "edit";
   };
 
-  ngAfterContentInit() {
-    this.subscribtion = this.booksService.books$.subscribe((list) => {
-      console.log(list);
-      debugger;
-      return list;
-    });
-  }
+  ngAfterContentInit() { }
+
+  ngDoCheck() { }
 
   ngOnDestroy() {
     this.subscribtion.unsubscribe();
   }
 
   getBooksID() {
+    this.activeRoute;
+    this.router;
 
     this.subscribtion = this.activeRoute.params.subscribe((details) => {
-      this.bookDetails.id = <Number>details['id'];
-      console.log(this.bookDetails.id);
+      // this.bookDetails.id = <Number>details['id'];
       return details;
     });
   };
 
+
+  getBook() {
+    this.editBook = this.booksService.geteditBook();
+    this.editBook.date = this.dc.transform(this.editBook.date);
+  }
 
 }

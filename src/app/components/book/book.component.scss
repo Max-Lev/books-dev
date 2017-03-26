@@ -5,6 +5,10 @@
             height: auto;
             max-height: 20rem;
             min-height: 20rem;
+            width: auto;
+            height: auto;
+            margin: 0 auto;
+            display: block;
         }
         .card-block {
             text-overflow: ellipsis;
@@ -35,12 +39,16 @@
             white-space: normal;
             overflow: hidden;
             .list-group-item {
+                span {
+                    // text-transform: capitalize;
+                }
                 &.tags-list {
                     span {
                         text-overflow: ellipsis;
                         overflow: hidden;
                         text-align: left;
                         white-space: nowrap;
+                        text-transform: capitalize;
                     }
                 }
             }
@@ -64,6 +72,32 @@
                 background-color: transparent;
                 border: 1px solid mediumpurple;
                 padding: 0;
+            }
+        }
+    }
+}
+
+.edit-book {
+     :host {
+        .card {
+            img {
+                width: 20rem;
+                height: auto;
+                max-height: 20rem;
+                min-height: 20rem;
+                margin: 0 auto;
+            }
+            form {
+                input[type="submit"] {
+                    display: block;
+                    border: 1px solid;
+                    width: 100%;
+                    align-content: center;
+                    margin-top: 1rem;
+                }
+                input.error {
+                    border: 1px solid red;
+                }
             }
         }
     }
