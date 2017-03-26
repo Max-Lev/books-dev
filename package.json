@@ -7,6 +7,7 @@
     "api-server": "node server/server.js",
     "ng": "ng",
     "lite-server": "lite-server",
+	"display":"npm run api-server & npm run lite-server",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
