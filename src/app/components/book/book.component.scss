@@ -1,4 +1,7 @@
 :host {
+    .list-group-flush:last-child .list-group-item:last-child{
+        border-bottom: 1px solid rgba(0,0,0,.125);
+    }
     .card {
         .card-img-top {
             max-width: 100%;
@@ -39,9 +42,6 @@
             white-space: normal;
             overflow: hidden;
             .list-group-item {
-                span {
-                    // text-transform: capitalize;
-                }
                 &.tags-list {
                     span {
                         text-overflow: ellipsis;
@@ -65,12 +65,11 @@
                 text-align: center;
                 height: 7.5rem;
                 justify-content: center;
+                    align-items: center;
             }
             button.btn {
-                width: 5rem;
-                height: 5rem;
-                background-color: transparent;
-                border: 1px solid mediumpurple;
+                width: 6rem;
+                height: 3rem;
                 padding: 0;
             }
         }

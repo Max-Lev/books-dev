@@ -1,6 +1,6 @@
 export class Book {
 
-    private id: number;
+    public id: number;
     private title: string;
     private author: string;
     private image: string;

@@ -1,4 +1,9 @@
 :host {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    align-self: center;
+    margin-top: 1%;
     .edit-book {
         width: 30%;
         margin: 0 auto;

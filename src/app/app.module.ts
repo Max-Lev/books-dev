@@ -1,3 +1,4 @@
+import { ModalService } from './services/model/modal.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -13,6 +14,8 @@ import { BooksListComponent } from './components/books-list/books-list.component
 import { DateConverterPipe } from './filters/date-converter.pipe';
 import { ReactiveFormsModule,FormControl,FormGroup } from '@angular/forms';
 import { BookNamePipe } from './filters/book-name.pipe';
+import { ModelComponent } from './components/model/model.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +23,8 @@ import { BookNamePipe } from './filters/book-name.pipe';
     EditComponent,
     BooksListComponent,
     DateConverterPipe,
-    BookNamePipe
+    BookNamePipe,
+    ModelComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +33,12 @@ import { BookNamePipe } from './filters/book-name.pipe';
     routingModule,
     ReactiveFormsModule
   ],
-  providers: [BooksResolveService, BooksService,DateConverterPipe],
+  providers: [
+    BooksResolveService, 
+    BooksService,
+    DateConverterPipe,
+    ModalService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

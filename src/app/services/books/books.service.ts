@@ -5,7 +5,8 @@ import { Subject, Observable } from "rxjs";
 @Injectable()
 export class BooksService {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) { 
+  }
 
   list: Array<any>;
   setBooks(list: any) {

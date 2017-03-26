@@ -1,6 +1,6 @@
 import { BooksListComponent } from './../../components/books-list/books-list.component';
 import { EditComponent } from './../../components/edit/edit.component';
-import { Routes, RouterModule,CanActivate } from '@angular/router';
+import { Routes, RouterModule, CanActivate } from '@angular/router';
 import { BooksService } from './../../services/books/books.service';
 import { AppComponent } from './../../app.component';
 import { NgModule } from '@angular/core';
@@ -14,9 +14,10 @@ const appRoute: Routes = [
       books: BooksResolveService
     }
   },
+  { path: 'books/:id', redirectTo: '/books' },
   { path: 'edit/:id', component: EditComponent },
   { path: 'edit', redirectTo: '/books' },
-  { path: '', redirectTo: '/books', pathMatch: 'full' },
+  { path: '', redirectTo: 'books', pathMatch: 'full' },
   { path: '**', component: BooksListComponent }
 ];
 
@@ -31,8 +32,8 @@ const appRoute: Routes = [
   declarations: []
 })
 export class routingModule {
-  constructor() { 
-
+  constructor() {
+    
   };
 }
 

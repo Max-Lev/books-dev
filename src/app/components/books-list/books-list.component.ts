@@ -1,35 +1,66 @@
+import { ModalService } from './../../services/model/modal.service';
+import { Subscription } from 'rxjs/Subscription';
 import { BookNamePipe } from './../../filters/book-name.pipe';
 import { Subject } from 'rxjs';
 import { BooksService } from './../../services/books/books.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterContentInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'books-list',
   templateUrl: './books-list.component.html',
   styleUrls: ['./books-list.component.scss'],
-  providers:[BookNamePipe]
+  providers: [BookNamePipe]
 })
-export class BooksListComponent implements OnInit {
+export class BooksListComponent implements OnInit, AfterContentInit,OnDestroy {
 
-  private mode:string;
+  private mode: string;
   private booksListResolved: Array<any> = [];
-  private searchList:Array<any> = [];
+  private searchList: Array<any> = [];
+  isEmpty: boolean = false;
+  results: string;
+  subscribtion: Subscription;
+  bookDeleteIndex: number;
   constructor(private _activeRoute: ActivatedRoute,
-    private bookNameFilter:BookNamePipe,
+    private bookNameFilter: BookNamePipe, private modalService: ModalService,
     private router: Router, private booksService: BooksService) {
+
   };
 
   ngOnInit() {
     this.booksListResolved = this._activeRoute.snapshot.data['books'];
     this.booksService.setBooks(this.booksListResolved);
     this.searchList = this.booksListResolved.concat();
-    this.mode="load";
+    this.mode = "load";
+  };
+
+  ngOnDestroy(){
+    this.subscribtion.unsubscribe();
   }
-  
-  searchFn(search:string){
-    this.booksListResolved = this.bookNameFilter.transform(search,this.searchList,this.booksListResolved);
+
+  ngAfterContentInit() {
+    this.subscribtion = this.modalService.delete(null).subscribe((isDelete) => {
+      if (isDelete == true) {
+        this.booksListResolved.splice(this.bookDeleteIndex, 1);
+      }
+    });
+  };
+
+
+  bookDeleteEventListener(index) {
+    this.bookDeleteIndex = index;
   }
+
+  searchFn(search: string) {
+    this.booksListResolved = this.bookNameFilter.transform(search, this.searchList, this.booksListResolved);
+    if (this.booksListResolved.length == 0) {
+      this.isEmpty = true;
+      this.results = `Sorry, no book title that start with '${search}'`;
+    }
+  }
+
+
+
 
 
 }

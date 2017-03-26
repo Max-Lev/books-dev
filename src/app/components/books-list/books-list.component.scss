@@ -5,4 +5,22 @@
         box-sizing: border-box;
         width: calc(100% / 4);
     }
+    .search-container {
+        padding: 1.5%;
+    }
+    .no-results {
+        display: flex;
+        flex: 1;
+        justify-content: center;
+    }
+    @media(max-width: 1199px) {
+        .book-list-container {
+            width: calc(100% / 3);
+        }
+    }
+    @media(max-width: 1024px) {
+        .book-list-container {
+            width: calc(100% / 2);
+        }
+    }
 }

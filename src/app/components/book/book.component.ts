@@ -1,4 +1,7 @@
-import { Component, OnInit, Input, OnChanges, AfterViewInit } from '@angular/core';
+import { Book } from './book.model';
+import { Subscription } from 'rxjs/Subscription';
+import { ModalService } from './../../services/model/modal.service';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BooksService } from './../../services/books/books.service';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -9,24 +12,25 @@ import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
   templateUrl: './book.component.html',
   styleUrls: ['./book.component.scss']
 })
-export class BookComponent implements OnInit, OnChanges {
+export class BookComponent implements OnInit {
 
   @Input() mode: string;
   @Input() book: any;
   @Input() list: Array<any>;
   editForm: FormGroup;
+  modalMode: boolean = false;
+  subscribtion: Subscription;
+  deleteIndex: any = [];
   constructor(private activeRoute: ActivatedRoute,
     private router: Router,
     private fbuilder: FormBuilder,
+    private modalService: ModalService,
     private booksService: BooksService) {
-
   };
 
   ngOnInit() {
     this.formBuilder();
   };
-
-  ngOnChanges(val) { }
 
   edit($event, itemID: number): void {
     $event.stopPropagation();
@@ -34,10 +38,27 @@ export class BookComponent implements OnInit, OnChanges {
     this.router.navigate([`edit`, itemID]);
   };
 
-  formBuilder() {
+@Output() bookDelete = new EventEmitter<any>();
+  delete($event, itemID: number, book: Book): number {
+    $event.stopPropagation();
 
-    if (this.mode == 'edit') 
-    {
+    let item = this.list.filter((item) => {
+      if (item.id == book.id) {
+        this.deleteIndex = this.list.indexOf(item);
+      }
+      return item;
+    });
+
+    this.modalService.display(true);
+    this.bookDelete.emit(this.deleteIndex);
+
+    return this.deleteIndex;
+  };
+
+
+  formBuilder() {
+    if (this.mode == 'edit') {
+      const lettersOnly = '^[a-zA-Z]*$';
       this.editForm = this.fbuilder.group
         ({
           title: ['', Validators.required],
@@ -45,28 +66,11 @@ export class BookComponent implements OnInit, OnChanges {
           date: ['', Validators.required],
           tags: ['', Validators.required],
         });
-
-      console.log(this.editForm);
     }
-
-  }
+  };
 
   onSubmit(form: any, editFormVal: any) {
-    console.log(form);
-    console.log(editFormVal);
     this.router.navigate(['books']);
-  }
-
-  delete($event, itemID: number): void {
-    $event.stopPropagation();
-    let index;
-    let book = this.list.find((item) => {
-      if (item.id == itemID) {
-        index = this.list.indexOf(item);
-      }
-      return index;
-    })
-    this.list.splice(index, 1);
   };
 
 

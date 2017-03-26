@@ -1,0 +1,26 @@
+:host {
+    .modal.fade .modal-dialog.displayModal {
+        -webkit-transition: -webkit-transform .3s ease-out;
+        transition: -webkit-transform .3s ease-out;
+        transition: transform .3s ease-out;
+        transition: transform .3s ease-out, -webkit-transform .3s ease-out;
+        transition: transform .3s ease-out, -webkit-transform .3s ease-out;
+        -webkit-transform: translate(0, -25%);
+        transform: translate(0, -25%);
+    }
+    .modal.fade .modal-dialog.displayModal {
+        display: block;
+        -webkit-transition: -webkit-transform .75s ease-out;
+        transition: -webkit-transform .75s ease-out;
+        transition: transform .75s ease-out;
+        transition: transform .75s ease-out, -webkit-transform .75s ease-out;
+        transition: transform .75s ease-out, -webkit-transform .75s ease-out;
+        transform: translate(0, 5%);
+    }
+    .modal.fade.displayModal {
+        opacity: 1;
+        -webkit-transition: opacity .15s linear;
+        transition: opacity .15s linear;
+        display: block;
+    }
+}

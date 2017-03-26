@@ -11,8 +11,7 @@ import { Subscription } from "rxjs/Subscription";
   styleUrls: ['./edit.component.scss'],
   providers: [DateConverterPipe]
 })
-export class EditComponent implements OnInit, OnDestroy,
-  AfterContentInit, DoCheck {
+export class EditComponent implements OnInit{
 
   editBook: Book;
   mode: string;
@@ -20,39 +19,18 @@ export class EditComponent implements OnInit, OnDestroy,
 
   constructor(private router: Router,
     private activeRoute: ActivatedRoute,
-    private dc: DateConverterPipe,
+    private dateConverter: DateConverterPipe,
     private booksService: BooksService) {
-
   };
 
   ngOnInit() {
-    this.getBooksID();
     this.getBook();
     this.mode = "edit";
   };
 
-  ngAfterContentInit() { }
-
-  ngDoCheck() { }
-
-  ngOnDestroy() {
-    this.subscribtion.unsubscribe();
-  }
-
-  getBooksID() {
-    this.activeRoute;
-    this.router;
-
-    this.subscribtion = this.activeRoute.params.subscribe((details) => {
-      // this.bookDetails.id = <Number>details['id'];
-      return details;
-    });
-  };
-
-
   getBook() {
     this.editBook = this.booksService.geteditBook();
-    this.editBook.date = this.dc.transform(this.editBook.date);
+    this.editBook.date = this.dateConverter.transform(this.editBook.date);
   }
 
 }
