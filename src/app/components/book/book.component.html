@@ -18,37 +18,36 @@
   </div>
 
 
-  <form *ngIf="(mode=='edit')?true:false" [formGroup]="editForm" 
-  (ngSubmit)="onSubmit(editForm,editForm.value)" name="editForm" novalidate>
+  <form *ngIf="(mode=='edit')?true:false" [formGroup]="editForm" (ngSubmit)="onSubmit(editForm,editForm.value)" name="editForm"
+    novalidate>
 
     <img class="card-img-top" [src]="book.image" alt="Card image cap">
 
     <div class="card-block title">
-      <input class="form-control" nameConverter
-       [class.error]="(!editForm.controls.title.valid)?true:false" 
+      <input class="form-control" 
+      [class.error]="(!editForm.controls.title.valid)?true:false"
         value="book.title" [(ngModel)]="book.title" [formControl]="editForm.controls.title" type="text" name="title" id="title">
     </div>
 
     <ul class="list-group list-group-flush item-desktop">
       <li class="list-group-item">
-        <input class="form-control" nameConverter
-         [class.error]="(!editForm.controls.author.valid)?true:false" value="book.author"
-          [(ngModel)]=" book.author" type="text" [formControl]="editForm.controls.author" name="author" id="author">
+
+        <input class="form-control"  
+        [class.error]="(!editForm.controls.author.valid)?true:false" value="book.author"
+          [(ngModel)]="book.author" type="text" [formControl]="editForm.controls.author" name="author" id="author">
       </li>
       <li class="list-group-item">
         <input class="form-control" [class.error]="(!editForm.controls.date.valid)?true:false" type="date" [formControl]="editForm.controls.date"
           value="book.date" [(ngModel)]="book.date" name="date" id="date">
       </li>
       <li class="list-group-item tags-list">
-        <input class="form-control" nameConverter
-         [class.error]="(!editForm.controls.tags.valid)?true:false" [(ngModel)]="book.tags"
+        <input class="form-control"  [class.error]="(!editForm.controls.tags.valid)?true:false" [(ngModel)]="book.tags"
           value="book.tags" type="text" name="tags" [formControl]="editForm.controls.tags" id="tags">
       </li>
     </ul>
 
     <div class="card-block card-btns">
-      <input *ngIf="(mode=='edit')?true:false" type="submit" 
-      [disabled]="!editForm.valid" [ngClass]="{'btn-outline-danger':(!editForm.valid)}"
+      <input *ngIf="(mode=='edit')?true:false" type="submit" [disabled]="!editForm.valid" [ngClass]="{'btn-outline-danger':(!editForm.valid)}"
         class="btn btn-outline-primary" [value]="(!editForm.valid)?'Form is not valid':'Save'" />
     </div>
 

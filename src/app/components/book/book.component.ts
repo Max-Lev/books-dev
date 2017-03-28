@@ -1,7 +1,7 @@
 import { Book } from './book.model';
 import { Subscription } from 'rxjs/Subscription';
 import { ModalService } from './../../services/model/modal.service';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, Directive } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BooksService } from './../../services/books/books.service';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -10,10 +10,10 @@ import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 @Component({
   selector: 'book',
   templateUrl: './book.component.html',
-  styleUrls: ['./book.component.scss']
+  styleUrls: ['./book.component.scss'],
 })
 export class BookComponent implements OnInit {
-
+  @Input('nameConverter') nC: string;
   @Input() mode: string;
   @Input() book: any;
   @Input() list: Array<any>;
@@ -56,17 +56,33 @@ export class BookComponent implements OnInit {
   formBuilder() {
     if (this.mode == 'edit') {
       const lettersOnly = '^[a-zA-Z]*$';
-      this.editForm = this.fbuilder.group
-        ({
-          title: ['', Validators.required],
-          author: ['', Validators.required],
-          date: ['', Validators.required],
-          tags: ['', Validators.required],
-        });
+      this.editForm = this.fbuilder.group({
+        title: ['', Validators.required],
+        author: ['', Validators.required],
+        date: ['', Validators.required],
+        tags: ['', Validators.required]
+      });
     }
   };
 
+  formormatter(form): any {
+    for (let control in this.editForm.controls) {
+      let fControl: any = this.editForm.controls[control];
+      if (fControl.dirty) {
+        let val = fControl.value.replace(/[^A-Za-z0-9 _'":!?,.-]/g, '');
+        val = val.charAt(0).toUpperCase() + val.slice(1);
+        this.editForm.controls[control].setValue(val);
+      }
+    }
+    return this.editForm;
+  }
+
   onSubmit(form: any, editFormVal: any) {
+
+    let formattedform = this.formormatter(form);
+    if (!formattedform.valid) {
+      return;
+    }
     this.router.navigate(['books']);
   };
 

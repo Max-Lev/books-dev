@@ -14,7 +14,7 @@
     <section class="book-list-container" *ngFor="let book of booksListResolved;let index=index;">
       <book [book]="book" (bookDelete)="bookDeleteEventListener($event)" [mode]="mode" [list]="booksListResolved"></book>
     </section>
-
+ 
     <section *ngIf="isEmpty" class="no-results">
       <p>{{results}}</p>
     </section>
