@@ -1,6 +1,6 @@
 :host {
-    .list-group-flush:last-child .list-group-item:last-child{
-        border-bottom: 1px solid rgba(0,0,0,.125);
+    .list-group-flush:last-child .list-group-item:last-child {
+        border-bottom: 1px solid rgba(0, 0, 0, .125);
     }
     .card {
         .card-img-top {
@@ -25,7 +25,7 @@
         }
         .card-block {
             h4.card-title {
-                overflow-y: hidden;
+                overflow: hidden;
                 text-overflow: ellipsis;
                 height: 2rem;
                 width: 90%;
@@ -65,7 +65,7 @@
                 text-align: center;
                 height: 7.5rem;
                 justify-content: center;
-                    align-items: center;
+                align-items: center;
             }
             button.btn {
                 width: 6rem;

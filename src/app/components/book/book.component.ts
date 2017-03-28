@@ -25,8 +25,7 @@ export class BookComponent implements OnInit {
     private router: Router,
     private fbuilder: FormBuilder,
     private modalService: ModalService,
-    private booksService: BooksService) {
-  };
+    private booksService: BooksService) { };
 
   ngOnInit() {
     this.formBuilder();
@@ -38,7 +37,7 @@ export class BookComponent implements OnInit {
     this.router.navigate([`edit`, itemID]);
   };
 
-@Output() bookDelete = new EventEmitter<any>();
+  @Output() bookDelete = new EventEmitter<any>();
   delete($event, itemID: number, book: Book): number {
     $event.stopPropagation();
 
@@ -51,10 +50,8 @@ export class BookComponent implements OnInit {
 
     this.modalService.display(true);
     this.bookDelete.emit(this.deleteIndex);
-
     return this.deleteIndex;
   };
-
 
   formBuilder() {
     if (this.mode == 'edit') {

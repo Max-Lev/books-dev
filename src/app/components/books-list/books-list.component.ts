@@ -4,7 +4,7 @@ import { BookNamePipe } from './../../filters/book-name.pipe';
 import { Subject } from 'rxjs';
 import { BooksService } from './../../services/books/books.service';
 import { Component, OnInit, AfterContentInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'books-list',
@@ -12,7 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./books-list.component.scss'],
   providers: [BookNamePipe]
 })
-export class BooksListComponent implements OnInit, AfterContentInit,OnDestroy {
+export class BooksListComponent implements OnInit, AfterContentInit, OnDestroy {
 
   private mode: string;
   private booksListResolved: Array<any> = [];
@@ -24,17 +24,23 @@ export class BooksListComponent implements OnInit, AfterContentInit,OnDestroy {
   constructor(private _activeRoute: ActivatedRoute,
     private bookNameFilter: BookNamePipe, private modalService: ModalService,
     private router: Router, private booksService: BooksService) {
-
   };
 
   ngOnInit() {
-    this.booksListResolved = this._activeRoute.snapshot.data['books'];
-    this.booksService.setBooks(this.booksListResolved);
+
+    if (this.booksService.geteditBook() == undefined) {
+      this.booksListResolved = this._activeRoute.snapshot.data['books'];
+      this.booksService.setBooks(this.booksListResolved);
+    }
+    else {
+      this.booksListResolved = this.booksService.getBooks();
+    }
+
     this.searchList = this.booksListResolved.concat();
     this.mode = "load";
   };
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.subscribtion.unsubscribe();
   }
 

@@ -15,6 +15,7 @@ import { DateConverterPipe } from './filters/date-converter.pipe';
 import { ReactiveFormsModule,FormControl,FormGroup } from '@angular/forms';
 import { BookNamePipe } from './filters/book-name.pipe';
 import { ModelComponent } from './components/model/model.component';
+import { NameConverterDirective } from './directives/name-converter.directive';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ModelComponent } from './components/model/model.component';
     BooksListComponent,
     DateConverterPipe,
     BookNamePipe,
-    ModelComponent
+    ModelComponent,
+    NameConverterDirective
   ],
   imports: [
     BrowserModule,

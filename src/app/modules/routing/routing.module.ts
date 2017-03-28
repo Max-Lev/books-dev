@@ -14,8 +14,12 @@ const appRoute: Routes = [
       books: BooksResolveService
     }
   },
-  { path: 'books/:id', redirectTo: '/books' },
-  { path: 'edit/:id', component: EditComponent },
+  {
+    path: 'books/:id', redirectTo: '/books'
+  },
+  {
+    path: 'edit/:id', component: EditComponent
+  },
   { path: 'edit', redirectTo: '/books' },
   { path: '', redirectTo: 'books', pathMatch: 'full' },
   { path: '**', component: BooksListComponent }
@@ -33,7 +37,7 @@ const appRoute: Routes = [
 })
 export class routingModule {
   constructor() {
-    
+
   };
 }
 

@@ -1,3 +1,4 @@
+import { BooksService } from './../books/books.service';
 import { Book } from './../../components/book/book.model';
 import { AppCommon } from './../../common/common';
 import { Injectable } from '@angular/core';
@@ -6,6 +7,7 @@ import { Http, Response } from '@angular/http';
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
 import { Subject } from 'rxjs/Subject';
+
 @Injectable()
 export class BooksResolveService implements Resolve<any> {
 
@@ -13,7 +15,7 @@ export class BooksResolveService implements Resolve<any> {
   private Book: Book;
   private BookList: Array<Book>;
 
-  constructor(private _http: Http) {
+  constructor(private _http: Http,private booksService:BooksService) {
     this._appCommon = new AppCommon();
   }
 
@@ -21,6 +23,10 @@ export class BooksResolveService implements Resolve<any> {
 
     let data: Subject<any> = new Subject<any>();
     this.BookList = [];
+    
+    if(this.booksService.getBooks()!=undefined)
+    return;
+    
     this._http.get(this._appCommon.booksApi).map((bookslist: Response) => {
 
       let dataResponse = bookslist.json().books;
@@ -29,9 +35,9 @@ export class BooksResolveService implements Resolve<any> {
           (
           new Book
             (
-            dataResponse[item]['book_id'], dataResponse[item]['title'],
-            dataResponse[item]['author_lf'], dataResponse[item]['entry_date'],
-            dataResponse[item]['cover'], dataResponse[item]['tags']
+                dataResponse[item]['book_id'], dataResponse[item]['title'],
+                dataResponse[item]['author_lf'], dataResponse[item]['entry_date'],
+                dataResponse[item]['cover'], dataResponse[item]['tags']
             )
           );
       }
@@ -46,7 +52,7 @@ export class BooksResolveService implements Resolve<any> {
       () => {
         data.complete();
       });
-
+    
     return data;
   }
 
