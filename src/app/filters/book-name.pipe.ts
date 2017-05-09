@@ -7,7 +7,7 @@ export class BookNamePipe implements PipeTransform {
   transform(value: any, originalList: any, list: any): any {
 
     let filterOptions: Array<any> = [];
-    if (value == undefined || value == "") {
+    if (value === undefined || value === '') {
       filterOptions = originalList;
     }
     else {

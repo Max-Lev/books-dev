@@ -84,6 +84,7 @@ export class BookComponent implements OnInit {
       return;
     }
     this.router.navigate(['books']);
+    
   };
 
 

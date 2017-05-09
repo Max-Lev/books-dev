@@ -17,7 +17,7 @@ export class BooksListComponent implements OnInit, AfterContentInit, OnDestroy {
   private mode: string;
   private booksListResolved: Array<any> = [];
   private searchList: Array<any> = [];
-  isEmpty: boolean = false;
+  isEmpty: Boolean = false;
   results: string;
   subscribtion: Subscription;
   bookDeleteIndex: number;
@@ -59,14 +59,14 @@ export class BooksListComponent implements OnInit, AfterContentInit, OnDestroy {
 
   searchFn(search: string) {
     this.booksListResolved = this.bookNameFilter.transform(search, this.searchList, this.booksListResolved);
-    if (this.booksListResolved.length == 0) {
+    if (this.booksListResolved.length === 0) {
       this.isEmpty = true;
       this.results = `Sorry, no book title that start with '${search}'`;
     }
+    else {
+      this.isEmpty = false;
+    }
   }
-
-
-
 
 
 }
